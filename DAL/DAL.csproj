@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7335A3FA-D365-4993-AED7-E930F9F3505C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL_Admin.cs" />
+    <Compile Include="DAL_Classes.cs" />
+    <Compile Include="DAL_DataProvider.cs" />
+    <Compile Include="DAL_DbContext.cs" />
+    <Compile Include="DAL_Points.cs" />
+    <Compile Include="DAL_Student.cs" />
+    <Compile Include="DAL_StudentAccount.cs" />
+    <Compile Include="DAL_Subjects.cs" />
+    <Compile Include="DAL_TeachClass.cs" />
+    <Compile Include="DAL_Teacher.cs" />
+    <Compile Include="DAL_TeacherAccount.cs" />
+    <Compile Include="DemoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DemoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110151626072_INSERT_TABLE.cs" />
+    <Compile Include="Migrations\202110151626072_INSERT_TABLE.designer.cs">
+      <DependentUpon>202110151626072_INSERT_TABLE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161314130_INSERT_CLASS.cs" />
+    <Compile Include="Migrations\202110161314130_INSERT_CLASS.designer.cs">
+      <DependentUpon>202110161314130_INSERT_CLASS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161315030_INSERT_STUDENT.cs" />
+    <Compile Include="Migrations\202110161315030_INSERT_STUDENT.designer.cs">
+      <DependentUpon>202110161315030_INSERT_STUDENT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161315490_INSERT_SUBJECT.cs" />
+    <Compile Include="Migrations\202110161315490_INSERT_SUBJECT.designer.cs">
+      <DependentUpon>202110161315490_INSERT_SUBJECT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161316283_INSERT_POINT.cs" />
+    <Compile Include="Migrations\202110161316283_INSERT_POINT.designer.cs">
+      <DependentUpon>202110161316283_INSERT_POINT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161317105_INSERT_TEACHER.cs" />
+    <Compile Include="Migrations\202110161317105_INSERT_TEACHER.designer.cs">
+      <DependentUpon>202110161317105_INSERT_TEACHER.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161317431_INSERT_TEACHCLASS.cs" />
+    <Compile Include="Migrations\202110161317431_INSERT_TEACHCLASS.designer.cs">
+      <DependentUpon>202110161317431_INSERT_TEACHCLASS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161318201_INSERT_TEACHER_ACCOUNT.cs" />
+    <Compile Include="Migrations\202110161318201_INSERT_TEACHER_ACCOUNT.designer.cs">
+      <DependentUpon>202110161318201_INSERT_TEACHER_ACCOUNT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161319216_INSERT_STUDENT_ACCOUNT.cs" />
+    <Compile Include="Migrations\202110161319216_INSERT_STUDENT_ACCOUNT.designer.cs">
+      <DependentUpon>202110161319216_INSERT_STUDENT_ACCOUNT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110161320016_INSERT_ADMIN.cs" />
+    <Compile Include="Migrations\202110161320016_INSERT_ADMIN.designer.cs">
+      <DependentUpon>202110161320016_INSERT_ADMIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DemoDataSet.xsc">
+      <DependentUpon>DemoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DemoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DemoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DemoDataSet.xss">
+      <DependentUpon>DemoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{b20242dd-f186-4102-a905-632ce2b69d8f}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202110151626072_INSERT_TABLE.resx">
+      <DependentUpon>202110151626072_INSERT_TABLE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161314130_INSERT_CLASS.resx">
+      <DependentUpon>202110161314130_INSERT_CLASS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161315030_INSERT_STUDENT.resx">
+      <DependentUpon>202110161315030_INSERT_STUDENT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161315490_INSERT_SUBJECT.resx">
+      <DependentUpon>202110161315490_INSERT_SUBJECT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161316283_INSERT_POINT.resx">
+      <DependentUpon>202110161316283_INSERT_POINT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161317105_INSERT_TEACHER.resx">
+      <DependentUpon>202110161317105_INSERT_TEACHER.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161317431_INSERT_TEACHCLASS.resx">
+      <DependentUpon>202110161317431_INSERT_TEACHCLASS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161318201_INSERT_TEACHER_ACCOUNT.resx">
+      <DependentUpon>202110161318201_INSERT_TEACHER_ACCOUNT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161319216_INSERT_STUDENT_ACCOUNT.resx">
+      <DependentUpon>202110161319216_INSERT_STUDENT_ACCOUNT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110161320016_INSERT_ADMIN.resx">
+      <DependentUpon>202110161320016_INSERT_ADMIN.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

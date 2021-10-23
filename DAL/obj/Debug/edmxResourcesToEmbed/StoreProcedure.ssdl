@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoEntityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="StudentClass" />
+    </Key>
+    <Property Name="StudentClass" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Points">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Point" Type="real" Nullable="false" />
+    <Property Name="Block" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentAccount">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="Student Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Class" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeachClass">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+      <PropertyRef Name="SubjectID" />
+      <PropertyRef Name="StudentClass" />
+    </Key>
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="SubjectID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StudentClass" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeacherAccount">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="TeacherName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Points_dbo_Students_StudentID">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="Points" Type="Self.Points" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Points">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Points_dbo_Subjects_SubjectID">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="Points" Type="Self.Points" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Points">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_StudentAccount_dbo_Students_StudentID">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentAccount" Type="Self.StudentAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentAccount">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Students_dbo_Classes_Class">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="StudentClass" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Classes_StudentClass">
+    <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="StudentClass" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="StudentClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Subjects_SubjectID">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Teachers_TeacherID">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeacherAccount_dbo_Teachers_TeacherID">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+    <End Role="TeacherAccount" Type="Self.TeacherAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="TeacherAccount">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="checkStudentLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudentID" Type="int" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="DemoEntityModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Points" EntityType="Self.Points" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAccount" EntityType="Self.StudentAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TeachClass" EntityType="Self.TeachClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TeacherAccount" EntityType="Self.TeacherAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Points_dbo_Students_StudentID" Association="Self.FK_dbo_Points_dbo_Students_StudentID">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Points" EntitySet="Points" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Points_dbo_Subjects_SubjectID" Association="Self.FK_dbo_Points_dbo_Subjects_SubjectID">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Points" EntitySet="Points" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_StudentAccount_dbo_Students_StudentID" Association="Self.FK_dbo_StudentAccount_dbo_Students_StudentID">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentAccount" EntitySet="StudentAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Students_dbo_Classes_Class" Association="Self.FK_dbo_Students_dbo_Classes_Class">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Classes_StudentClass" Association="Self.FK_dbo_TeachClass_dbo_Classes_StudentClass">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="TeachClass" EntitySet="TeachClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Subjects_SubjectID" Association="Self.FK_dbo_TeachClass_dbo_Subjects_SubjectID">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="TeachClass" EntitySet="TeachClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Teachers_TeacherID" Association="Self.FK_dbo_TeachClass_dbo_Teachers_TeacherID">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeachClass" EntitySet="TeachClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeacherAccount_dbo_Teachers_TeacherID" Association="Self.FK_dbo_TeacherAccount_dbo_Teachers_TeacherID">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeacherAccount" EntitySet="TeacherAccount" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

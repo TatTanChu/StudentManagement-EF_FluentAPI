@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DemoEntityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="StudentClass" />
+    </Key>
+    <Property Name="StudentClass" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_dbo_Students_dbo_Classes_Class" FromRole="Classes" ToRole="Students" />
+    <NavigationProperty Name="TeachClasses" Relationship="Self.FK_dbo_TeachClass_dbo_Classes_StudentClass" FromRole="Classes" ToRole="TeachClass" />
+  </EntityType>
+  <EntityType Name="Point">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Point1" Type="Single" Nullable="false" />
+    <Property Name="Block" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_dbo_Points_dbo_Students_StudentID" FromRole="Points" ToRole="Students" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_dbo_Points_dbo_Subjects_SubjectID" FromRole="Points" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="StudentAccount">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_dbo_StudentAccount_dbo_Students_StudentID" FromRole="StudentAccount" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="Student_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Class" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Class1" Relationship="Self.FK_dbo_Students_dbo_Classes_Class" FromRole="Students" ToRole="Classes" />
+    <NavigationProperty Name="Points" Relationship="Self.FK_dbo_Points_dbo_Students_StudentID" FromRole="Students" ToRole="Points" />
+    <NavigationProperty Name="StudentAccount" Relationship="Self.FK_dbo_StudentAccount_dbo_Students_StudentID" FromRole="Students" ToRole="StudentAccount" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Points" Relationship="Self.FK_dbo_Points_dbo_Subjects_SubjectID" FromRole="Subjects" ToRole="Points" />
+    <NavigationProperty Name="TeachClasses" Relationship="Self.FK_dbo_TeachClass_dbo_Subjects_SubjectID" FromRole="Subjects" ToRole="TeachClass" />
+  </EntityType>
+  <EntityType Name="TeachClass">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+      <PropertyRef Name="SubjectID" />
+      <PropertyRef Name="StudentClass" />
+    </Key>
+    <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StudentClass" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Class" Relationship="Self.FK_dbo_TeachClass_dbo_Classes_StudentClass" FromRole="TeachClass" ToRole="Classes" />
+    <NavigationProperty Name="Subject" Relationship="Self.FK_dbo_TeachClass_dbo_Subjects_SubjectID" FromRole="TeachClass" ToRole="Subjects" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_dbo_TeachClass_dbo_Teachers_TeacherID" FromRole="TeachClass" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="TeacherAccount">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_dbo_TeacherAccount_dbo_Teachers_TeacherID" FromRole="TeacherAccount" ToRole="Teachers" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="Int32" Nullable="false" />
+    <Property Name="TeacherName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TeachClasses" Relationship="Self.FK_dbo_TeachClass_dbo_Teachers_TeacherID" FromRole="Teachers" ToRole="TeachClass" />
+    <NavigationProperty Name="TeacherAccount" Relationship="Self.FK_dbo_TeacherAccount_dbo_Teachers_TeacherID" FromRole="Teachers" ToRole="TeacherAccount" />
+  </EntityType>
+  <Association Name="FK_dbo_Students_dbo_Classes_Class">
+    <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="StudentClass" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Class" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Classes_StudentClass">
+    <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classes">
+        <PropertyRef Name="StudentClass" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="StudentClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Points_dbo_Students_StudentID">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="Points" Type="Self.Point" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="Points">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Points_dbo_Subjects_SubjectID">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="Points" Type="Self.Point" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Points">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_StudentAccount_dbo_Students_StudentID">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentAccount" Type="Self.StudentAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentAccount">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Subjects_SubjectID">
+    <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeachClass_dbo_Teachers_TeacherID">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="TeachClass" Type="Self.TeachClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="TeachClass">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TeacherAccount_dbo_Teachers_TeacherID">
+    <End Role="Teachers" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="TeacherAccount" Type="Self.TeacherAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="TeacherID" />
+      </Principal>
+      <Dependent Role="TeacherAccount">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DemoEntityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="Points" EntityType="Self.Point" />
+    <EntitySet Name="StudentAccounts" EntityType="Self.StudentAccount" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Subjects" EntityType="Self.Subject" />
+    <EntitySet Name="TeachClasses" EntityType="Self.TeachClass" />
+    <EntitySet Name="TeacherAccounts" EntityType="Self.TeacherAccount" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <AssociationSet Name="FK_dbo_Students_dbo_Classes_Class" Association="Self.FK_dbo_Students_dbo_Classes_Class">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Classes_StudentClass" Association="Self.FK_dbo_TeachClass_dbo_Classes_StudentClass">
+      <End Role="Classes" EntitySet="Classes" />
+      <End Role="TeachClass" EntitySet="TeachClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Points_dbo_Students_StudentID" Association="Self.FK_dbo_Points_dbo_Students_StudentID">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Points" EntitySet="Points" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Points_dbo_Subjects_SubjectID" Association="Self.FK_dbo_Points_dbo_Subjects_SubjectID">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Points" EntitySet="Points" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_StudentAccount_dbo_Students_StudentID" Association="Self.FK_dbo_StudentAccount_dbo_Students_StudentID">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentAccount" EntitySet="StudentAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Subjects_SubjectID" Association="Self.FK_dbo_TeachClass_dbo_Subjects_SubjectID">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="TeachClass" EntitySet="TeachClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeachClass_dbo_Teachers_TeacherID" Association="Self.FK_dbo_TeachClass_dbo_Teachers_TeacherID">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeachClass" EntitySet="TeachClasses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TeacherAccount_dbo_Teachers_TeacherID" Association="Self.FK_dbo_TeacherAccount_dbo_Teachers_TeacherID">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="TeacherAccount" EntitySet="TeacherAccounts" />
+    </AssociationSet>
+    <FunctionImport Name="checkStudentLogin" EntitySet="StudentAccounts" ReturnType="Collection(DemoEntityModel.StudentAccount)">
+      <Parameter Name="StudentID" Mode="In" Type="Int32" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="checkStudentLogin_Result">
+    <Property Type="Int32" Name="StudentID" Nullable="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="100" />
+  </ComplexType>
+</Schema>
